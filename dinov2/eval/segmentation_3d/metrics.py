@@ -78,5 +78,7 @@ def get_metric(dataset_name):
         return LASEGMetrics()
     elif dataset_name == "TDSC-ABUS":
         return LASEGMetrics()  # same as LA-SEG
+    elif "fomo-task2_3channels" in dataset_name:
+        return LASEGMetrics()  # same as LA-SEG
     else:
         raise ValueError(f"Unknown dataset name: {dataset_name}")

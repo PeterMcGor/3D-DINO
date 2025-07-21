@@ -1,0 +1,146 @@
+{
+  "training": [
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_1_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_1_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_1_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_1.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_10_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_10_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_10_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_10.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_11_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_11_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_11_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_11.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_16_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_16_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_16_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_16.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_17_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_17_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_17_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_17.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_20_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_20_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_20_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_20.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_21_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_21_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_21_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_21.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_22_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_22_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_22_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_22.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_3_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_3_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_3_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_3.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_5_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_5_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_5_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_5.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_6_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_6_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_6_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_6.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_7_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_7_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_7_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_7.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_8_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_8_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_8_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_8.nii.gz"
+    }
+  ],
+  "validation": [
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_14_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_14_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_14_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_14.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_18_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_18_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_18_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_18.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_19_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_19_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_19_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_19.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_2_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_2_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTr/sub_2_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTr/sub_2.nii.gz"
+    }
+  ],
+  "test": [
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_12_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_12_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_12_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTs/sub_12.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_13_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_13_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_13_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTs/sub_13.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_15_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_15_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_15_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTs/sub_15.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_23_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_23_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_23_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTs/sub_23.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_4_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_4_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_4_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTs/sub_4.nii.gz"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_9_0000.nii.gz",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_9_0001.nii.gz",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/imagesTs/sub_9_0002.nii.gz",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw/Dataset498_FOMO-Men_No-SK_FL-DWI/labelsTs/sub_9.nii.gz"
+    }
+  ]
+}

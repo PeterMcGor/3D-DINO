@@ -134,7 +134,6 @@ def make_transforms(dataset_name, image_size, resize_scale, min_int):
                 ConcatItemsd(keys=["image1", "image2", "image3", "image4"], name='image', dim=0),
                 DeleteItemsd(keys=["image1", "image2", "image3", "image4"]),
                 EnsureTyped(keys=["image", "label"]),
-                ConvertToMultiChannelBasedOnBratsClassesd(keys=["label"]),
                 Orientationd(keys=["image", "label"], axcodes="RAS"),
                 Spacingd(
                     keys=["image", "label"],
@@ -281,7 +280,78 @@ def make_transforms(dataset_name, image_size, resize_scale, min_int):
                 SpatialPadd(keys=["label"], spatial_size=(image_size, image_size, image_size), value=0.),
             ]
         )
+    
+    elif "fomo-task2_3channels" in dataset_name:
+        print(f"*******Using custom transforms for dataset {dataset_name}*******")
 
+        train_transforms = Compose([
+            # Load 3 Nifti images and labels (ensure_channel_first=True already handles channels)
+            LoadImaged(keys=["image1", "image2", "image3", "label"], ensure_channel_first=True),
+            # ❌ REMOVE THIS LINE: EnsureChannelFirstd(keys=["image1", "image2", "image3", "label"]),
+            # Concatenate ONLY the 3 images into a single multi-channel image
+            ConcatItemsd(keys=["image1", "image2", "image3"], name='image', dim=0),
+            # Remove the original individual image keys to save memory
+            DeleteItemsd(keys=["image1", "image2", "image3"]),
+            # Ensure proper tensor types
+            EnsureTyped(keys=["image", "label"]),
+            # Spatial orientation
+            Orientationd(keys=["image", "label"], axcodes="RAS"),
+            # Resample to target spacing
+            Spacingd(
+                keys=["image", "label"],
+                pixdim=(1.0 / resize_scale, 1.0 / resize_scale, 1.0 / resize_scale),
+                mode=("bilinear", "nearest"),
+            ),
+            # Intensity normalization (per channel for the 3-channel image)
+            ScaleIntensityRangePercentilesd(
+                keys=["image"], lower=0.05, upper=99.95, b_min=min_int, b_max=1, 
+                clip=True, channel_wise=True
+            ),
+            # Spatial padding to ensure minimum size
+            SpatialPadd(keys=["image"], spatial_size=(image_size, image_size, image_size), value=min_int),
+            SpatialPadd(keys=["label"], spatial_size=(image_size, image_size, image_size), value=0.),
+            # Random spatial cropping for data augmentation
+            RandSpatialCropSamplesd(
+                keys=["image", "label"], 
+                num_samples=4, 
+                roi_size=(image_size, image_size, image_size), 
+                random_size=False
+            ),
+            # Data augmentation
+            RandFlipd(keys=["image", "label"], prob=0.5, spatial_axis=0),
+            RandFlipd(keys=["image", "label"], prob=0.5, spatial_axis=1),
+            RandFlipd(keys=["image", "label"], prob=0.5, spatial_axis=2),
+            RandScaleIntensityd(keys="image", factors=0.1, prob=1.0),
+            RandShiftIntensityd(keys="image", offsets=0.1, prob=1.0),
+        ])
+        
+        val_transforms = Compose([
+            # Load 3 Nifti images and labels
+            LoadImaged(keys=["image1", "image2", "image3", "label"], ensure_channel_first=True),
+            # ❌ REMOVE THIS LINE: EnsureChannelFirstd(keys=["image1", "image2", "image3", "label"]),
+            # Concatenate ONLY the 3 images into a single multi-channel image
+            ConcatItemsd(keys=["image1", "image2", "image3"], name='image', dim=0),
+            # Remove the original individual image keys
+            DeleteItemsd(keys=["image1", "image2", "image3"]),
+            # Ensure proper tensor types
+            EnsureTyped(keys=["image", "label"]),
+            # Spatial orientation
+            Orientationd(keys=["image", "label"], axcodes="RAS"),
+            # Resample to target spacing
+            Spacingd(
+                keys=["image", "label"],
+                pixdim=(1.0 / resize_scale, 1.0 / resize_scale, 1.0 / resize_scale),
+                mode=("bilinear", "nearest"),
+            ),
+            # Intensity normalization
+            ScaleIntensityRangePercentilesd(
+                keys=["image"], lower=0.05, upper=99.95, b_min=min_int, b_max=1, 
+                clip=True, channel_wise=True
+            ),
+            # Spatial padding
+            SpatialPadd(keys=["image"], spatial_size=(image_size, image_size, image_size), value=min_int),
+            SpatialPadd(keys=["label"], spatial_size=(image_size, image_size, image_size), value=0.),
+        ])
     else:
         raise ValueError(f"Dataset {dataset_name} not supported.")
 

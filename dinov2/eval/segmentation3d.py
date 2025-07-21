@@ -102,6 +102,12 @@ def add_seg_args(parser):
 
 def train_iter(model, batch, optimizer, scheduler, loss_function, scaler):
     x, y = (batch["image"].cuda(), batch["label"].cuda())
+
+    # Add these debug lines
+    #print(f"DEBUG - Input shape: {x.shape}")
+    #print(f"DEBUG - Label shape: {y.shape}")
+    #print(f"DEBUG - Label unique values: {torch.unique(y)}")
+    #print(f"DEBUG - Label dtype: {y.dtype}")
     logits = model(x)
     loss = loss_function(logits, y)
     optimizer.zero_grad()
@@ -212,7 +218,7 @@ def do_finetune(feature_model, autocast_dtype, args):
         t_total=max_iter
     )
 
-    if args.dataset_name == 'BTCV' or args.dataset_name == 'LA-SEG' or args.dataset_name == 'TDSC-ABUS':
+    if args.dataset_name == 'BTCV' or args.dataset_name == 'LA-SEG' or args.dataset_name == 'TDSC-ABUS' or "fomo-task2_3channels" in args.dataset_name:
         loss_fn = DiceCELoss(to_onehot_y=True, softmax=True)
     elif args.dataset_name == 'BraTS':
         loss_fn = DiceLoss(smooth_nr=0, smooth_dr=1e-5, squared_pred=True, to_onehot_y=False, sigmoid=True)
