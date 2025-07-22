@@ -1,5 +1,3 @@
-_libgcc_mutex
-_openmp_mutex
 antlr4-python3-runtime
 asttokens
 bzip2
