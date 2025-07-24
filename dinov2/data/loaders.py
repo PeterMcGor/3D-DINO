@@ -121,11 +121,16 @@ def make_segmentation_dataset_3d(
         datalist_path = os.path.join(base_directory, 'TDSC-ABUS_100_datalist.json')
         class_num = 2
         input_channels = 1
-    elif "fomo-task2_3channels" in dataset_name or "fomo-task2_2channels" in dataset_name:
+    elif "fomo-task2_3channels" in dataset_name:
         datalist_path = os.path.join(base_directory, f'{dataset_name}.json')
         class_num = 2
         input_channels = 3
         # For FOMO task 2, we use 3 channels (image1, image2, image3) as input
+    elif "fomo-task2_2channels" in dataset_name:
+        datalist_path = os.path.join(base_directory, f'{dataset_name}.json')
+        class_num = 2
+        input_channels = 2
+        # For FOMO task 2, we use 2 channels (image1, image2) as input
     else:
         raise ValueError(f'Unsupported dataset "{dataset_name}"')
 
