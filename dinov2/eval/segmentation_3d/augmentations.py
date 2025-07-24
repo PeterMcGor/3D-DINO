@@ -281,7 +281,7 @@ def make_transforms(dataset_name, image_size, resize_scale, min_int):
             ]
         )
     
-    elif "fomo-task2_3channels" in dataset_name:
+    elif "fomo-task2_3channels" in dataset_name or "fomo-task2_2channels" in dataset_name:
         print(f"*******Using custom transforms for dataset {dataset_name}*******")
 
         train_transforms = Compose([
