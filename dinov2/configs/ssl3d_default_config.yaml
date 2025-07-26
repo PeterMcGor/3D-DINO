@@ -61,12 +61,12 @@ ibot:
 train:
   batch_size_per_gpu: 128
   data_min_axis_size: 24
-  dataset_path:  "/Benson_DATA2/gerinb/FOMO2025/FOMO-MRI-preprocessed/dataset.json" #'/Benson_DATA2/gerinb/FOMO2025/FOMO-MRI-preprocessed/dataset.json' #"/Benson_DATA2/gerinb/FOMO2025/FOMO-MRI-preprocessed/dataset_first_100.json" # '/Benson_DATA2/gerinb/FOMO2025/FOMO-MRI-preprocessed/dataset.json'
+  dataset_path:  "/home/jovyan/workspace/3D-DINO/openmind_v2_clean_v2.json" #"/Benson_DATA2/gerinb/FOMO2025/FOMO-MRI-preprocessed/dataset.json" #'/Benson_DATA2/gerinb/FOMO2025/FOMO-MRI-preprocessed/dataset.json' #"/Benson_DATA2/gerinb/FOMO2025/FOMO-MRI-preprocessed/dataset_first_100.json" # '/Benson_DATA2/gerinb/FOMO2025/FOMO-MRI-preprocessed/dataset.json'
   output_dir: ./output_test
   saveckp_freq: 1
   seed: 0
-  num_workers: 32
-  OFFICIAL_EPOCH_LENGTH: 1250
+  num_workers: 4
+  OFFICIAL_EPOCH_LENGTH: 25 #1250
   cache_dataset: True
   centering: sinkhorn_knopp
 student:
@@ -87,14 +87,14 @@ teacher:
   final_momentum_teacher: 1
   warmup_teacher_temp: 0.04
   teacher_temp: 0.07
-  warmup_teacher_temp_epochs: 30
+  warmup_teacher_temp_epochs: 1500 #30
 optim:
-  epochs: 100
+  epochs: 5000
   weight_decay: 0.04
   weight_decay_end: 0.4
   base_lr: 0.002  # 0.002 learning rate for a batch size of 1024
   lr: 0.  # will be set after applying scaling rule
-  warmup_epochs: 10
+  warmup_epochs: 500
   min_lr: 1.0e-06
   clip_grad: 3.0 # 3.0
   freeze_last_layer_epochs: 1  # 1

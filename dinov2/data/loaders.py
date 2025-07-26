@@ -13,7 +13,8 @@ import random
 
 import torch
 from torch.utils.data import Sampler
-from monai.data import CacheNTransDataset, PersistentDataset
+import torch.distributed as dist
+from monai.data import CacheNTransDataset, PersistentDataset, SmartCacheDataset
 import json
 
 from .samplers import EpochSampler, InfiniteSampler, ShardedInfiniteSampler
@@ -52,6 +53,7 @@ def make_dataset_3d(
     cache_path: str,
     data_min_axis_size: int,
     transform: Optional[Callable] = None,
+    n_transforms: int = 5
 ):
     """
     Creates a 3d input dataset with the specified parameters.
@@ -70,13 +72,42 @@ def make_dataset_3d(
     with open(dataset_path, 'r') as json_f:
         datalist = json.load(json_f)
 
-    # filter overly small data
+    
     datalist = [x for x in datalist if min(x['shape'][:3]) > data_min_axis_size]
-    dataset = CacheNTransDataset(datalist, transform=transform, cache_n_trans=5, cache_dir=cache_path)
+    
+    # Get distributed info
+    rank = dist.get_rank() if dist.is_initialized() else 0
+    world_size = dist.get_world_size() if dist.is_initialized() else 1
+    
+    print(f"-----GPU {rank} creating dataset: {len(datalist)} items, world_size: {world_size}-----")
+    
+    # Shuffle data differently per GPU
+    random.seed(42 + rank)
+    shuffled_data = datalist.copy()
+    random.shuffle(shuffled_data)
 
-    # Aggregated datasets do not expose (yet) these attributes, so add them.
+    #dataset = CacheNTransDataset(shuffled_data, transform=transform, cache_n_trans=n_transforms, cache_dir=cache_path) #not sure igf here is automatic the shuflfing bettwen gpus
+    dataset= SmartCacheDataset(data=shuffled_data, transform=transform, cache_num=3500, replace_rate=0.25, num_init_workers=16, num_replace_workers=16,seed=None, shuffle=False)
+
+    # Initialize cache and verify diversity
+    _ = dataset[0]
+    
+    if hasattr(dataset, '_cache') and len(dataset._cache) > 0:
+        # Show first 3 cached filenames for verification
+        sample_files = []
+        for i in range(min(3, len(dataset._cache))):
+            if i < len(shuffled_data):
+                filepath = shuffled_data[i].get('image', 'unknown')
+                filename = filepath
+                sample_files.append(filename)
+        
+        print(f"-----GPU {rank} cached {len(dataset._cache)} items. Sample: {sample_files}-----")
+    
+    
+    # Ensure transform attribute exists
     if not hasattr(dataset, "transform"):
         setattr(dataset, "transform", transform)
+    
 
     return dataset
 
