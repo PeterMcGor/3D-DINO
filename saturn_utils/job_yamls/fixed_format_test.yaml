@@ -1,0 +1,104 @@
+schema_version: 2024.04.01
+type: job
+spec:
+  name: test-dino-training-full-train
+  owner: dgm-ms-brain-mri/pedro-maciasgordaliza
+  description: Test DINO training with conda environment
+  image: nvidia-oci/saturncloud/saturn-python-pytorch:2024.08.01
+  instance_type: 1xA100
+  environment_variables:
+    CACHE_DIR: >-
+      /home/jovyan/shared/pedro-maciasgordaliza/openmind-dataset/OpenMind/cache_dir_test
+    OUTPUT_DIR: >-
+      /home/jovyan/shared/pedro-maciasgordaliza/openmind-dataset/OpenMind/test_fold
+    PYTHONPATH: /home/jovyan/workspace/3D-DINO
+    DATASET_NAME: fomo-task2_3channels_fold_0
+    BASE_DATA_DIR: /home/jovyan/workspace/3D-DINO/dino_datasets/fomo-task2_3channels/
+    PRETRAINED_WEIGHTS: >-
+      /home/jovyan/shared/pedro-maciasgordaliza/fomo25/Dino3d_last-models/highres_teacher_checkpoint.pth
+  working_directory: /home/jovyan/workspace/3D-DINO
+  token_scope: job:{self}:dask:write
+  git_repositories:
+    - url: git@github.com:PeterMcGor/3D-DINO.git
+      path: /home/jovyan/workspace/3D-DINO
+      public: false
+  secrets: []
+  shared_folders:
+    - owner: dgm-ms-brain-mri/pedro-maciasgordaliza
+      path: /home/jovyan/shared/pedro-maciasgordaliza/fomo25
+      name: fomo25
+    - owner: dgm-ms-brain-mri/pedro-maciasgordaliza
+      path: /home/jovyan/shared/pedro-maciasgordaliza/openmind-dataset
+      name: openmind-dataset
+    - owner: dgm-ms-brain-mri/pedro-maciasgordaliza
+      path: /home/jovyan/shared/pedro-maciasgordaliza/ms-data
+      name: ms-data
+  command: |
+    bash -c "
+    echo '=================================================' &&
+    echo 'DINO Training Job with Conda Environment' &&
+    echo '=================================================' &&
+    
+    echo 'Step 1: Checkout and update branch...' &&
+    git fetch origin fomo-finetuning-t2 &&
+    git checkout fomo-finetuning-t2 &&
+    git reset --hard origin/fomo-finetuning-t2 &&
+    
+    echo 'Step 2: Create basic conda environment...' &&
+    conda create -n dino3d python=3.9 -y &&
+    
+    echo 'Step 3: Initialize bash and activate environment...' &&
+    conda init bash &&
+    source ~/.bashrc &&
+    conda activate dino3d &&
+    
+    echo 'Step 4: Verify environment activation...' &&
+    echo 'Current conda environment:' \$CONDA_DEFAULT_ENV &&
+    python --version &&
+    
+    echo 'Step 5: Install packages from requirements.txt...' &&
+    pip install -r requirements.txt --quiet &&
+    
+    echo 'Step 6: Create output and cache directories...' &&
+    mkdir -p \$OUTPUT_DIR &&
+    mkdir -p \$CACHE_DIR &&
+    
+    echo 'Step 7: Verify environment and CUDA...' &&
+    echo 'PyTorch version and CUDA:' &&
+    python -c 'import torch; print(f\"PyTorch: {torch.__version__}, CUDA: {torch.cuda.is_available()}\")' &&
+    
+    echo 'Step 8: Starting DINO training (1 epoch test)...' &&
+    echo 'Training parameters:' &&
+    echo '  - Dataset: \$DATASET_NAME' &&
+    echo '  - Output dir: \$OUTPUT_DIR' &&
+    echo '  - Cache dir: \$CACHE_DIR' &&
+    echo '  - Pretrained weights: \$PRETRAINED_WEIGHTS' &&
+    echo '  - Base data dir: \$BASE_DATA_DIR' &&
+    
+    python dinov2/eval/segmentation3d.py \\
+      --config-file 'dinov2/configs/train/vit3d_highres.yaml' \\
+      --output-dir '\$OUTPUT_DIR' \\
+      --pretrained-weights '\$PRETRAINED_WEIGHTS' \\
+      --dataset-name '\$DATASET_NAME' \\
+      --dataset-percent 100 \\
+      --base-data-dir '\$BASE_DATA_DIR' \\
+      --segmentation-head 'ViTAdapterUNETR' \\
+      --epochs 1 \\
+      --epoch-length 10 \\
+      --eval-iters 5 \\
+      --warmup-iters 5 \\
+      --image-size 112 \\
+      --batch-size 2 \\
+      --num-workers 15 \\
+      --learning-rate 1e-4 \\
+      --cache-dir '\$CACHE_DIR' \\
+      --resize-scale 1.0 &&
+    
+    echo '=================================================' &&
+    echo 'DINO training test completed successfully!' &&
+    echo 'Check output directory: \$OUTPUT_DIR' &&
+    echo '================================================='
+    "
+  scale: 1
+  use_spot_instance: false
+  schedule: null

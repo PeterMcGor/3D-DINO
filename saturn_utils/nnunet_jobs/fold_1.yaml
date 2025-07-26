@@ -1,0 +1,32 @@
+schema_version: 2024.04.01
+type: job
+spec:
+  name: nnunet-train-classic-AdamW-ds499-fold1-FOMOt2
+  owner: dgm-ms-brain-mri/pedro-maciasgordaliza
+  description: Training nnUNet classic for dataset 499 fold 0
+  image: dgm-ms-brain-mri/pedro-maciasgordaliza/seg_model_attr:0.0.3
+  instance_type: 1xA100
+  environment_variables:
+    FOLD: '1'
+    DATASET: '499'
+    TRAINER: nnUNetTrainer
+    nnUNet_raw: >-
+      /home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_raw
+    nnUNet_results: >-
+      /home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_results
+    nnUNet_preprocessed: >-
+      /home/jovyan/shared/pedro-maciasgordaliza/ms-data/nnunet_folders/nnUNet_preprocessed
+  working_directory: /home/jovyan/workspace/CausalDropMedImg
+  token_scope: job:{self}:dask:write
+  git_repositories: []
+  secrets: []
+  shared_folders:
+    - owner: dgm-ms-brain-mri/pedro-maciasgordaliza
+      path: /home/jovyan/shared/pedro-maciasgordaliza/ms-data
+      name: ms-data
+  command: >-
+    nnUNetv2_train "499" 3d_fullres "1" -tr "nnUNetTrainerAdam3en4" --npz && sc
+    stop job nnunet-train-classic-AdamW-ds499-fold2-FOMOt2
+  scale: 1
+  use_spot_instance: false
+  schedule: null
