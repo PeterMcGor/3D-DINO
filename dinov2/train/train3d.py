@@ -340,14 +340,15 @@ def do_train(cfg, model, resume=False):
         metric_logger.update(total_loss=losses_reduced, **loss_dict_reduced)
 
 
-        if distributed.is_main_process():
-            wandb.log({"train loss": losses_reduced,
-                       "learning rate": lr,
-                       "weight decay": wd,
-                       "momentum": mom,
-                       "last layer lr": last_layer_lr,
-                       "current batch size": current_batch_size,
-                       })
+        #if distributed.is_main_process():
+        #    print("Calling wand???")
+        #    wandb.log({"train loss": losses_reduced,
+        #               "learning rate": lr,
+        #               "weight decay": wd,
+        #               "momentum": mom,
+        #               "last layer lr": last_layer_lr,
+        #               "current batch size": current_batch_size,
+        #               })
 
         # checkpointing and testing
         if cfg.evaluation.eval_period_iterations > 0 and (iteration + 1) % cfg.evaluation.eval_period_iterations == 0:
