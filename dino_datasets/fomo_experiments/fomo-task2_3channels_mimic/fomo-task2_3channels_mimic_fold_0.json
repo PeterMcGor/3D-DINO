@@ -1,0 +1,146 @@
+{
+  "training": [
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_10_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_10_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_10_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_10_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_11_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_11_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_11_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_11_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_14_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_14_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_14_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_14_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_16_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_16_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_16_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_16_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_17_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_17_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_17_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_17_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_18_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_18_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_18_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_18_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_19_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_19_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_19_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_19_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_2_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_2_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_2_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_2_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_20_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_20_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_20_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_20_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_5_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_5_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_5_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_5_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_6_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_6_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_6_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_6_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_7_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_7_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_7_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_7_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_8_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_8_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_8_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_8_label.npy"
+    }
+  ],
+  "validation": [
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_1_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_1_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_1_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_1_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_21_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_21_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_21_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_21_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_22_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_22_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_22_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_22_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_3_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_3_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_3_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_3_label.npy"
+    }
+  ],
+  "test": [
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_12_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_12_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_12_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_12_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_13_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_13_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_13_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_13_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_15_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_15_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_15_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_15_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_23_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_23_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_23_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_23_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_4_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_4_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_4_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_4_label.npy"
+    },
+    {
+      "image1": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_9_dwi.npy",
+      "image2": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_9_flair.npy",
+      "image3": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_9_swi.npy",
+      "label": "/home/jovyan/shared/pedro-maciasgordaliza/fomo25/finetuning_data_preprocess/mimic-pretreaining-preprocessing/Task002_FOMO2_extracted_modalities/FOMO2_sub_9_label.npy"
+    }
+  ]
+}

@@ -185,9 +185,14 @@ def make_segmentation_dataset_3d(
         assert len(copied_datalist) == batch_size
         train_datalist = copied_datalist
 
-    train_dataset = PersistentDataset(train_datalist, transform=train_transforms, cache_dir=cache_path)
+    #train_dataset = PersistentDataset(train_datalist, transform=train_transforms, cache_dir=cache_path)
+    train_dataset= SmartCacheDataset(data=train_datalist, transform=train_transforms, cache_num=20, replace_rate=0.75, num_init_workers=8, num_replace_workers=8, shuffle=True)
+
     val_dataset = PersistentDataset(val_datalist, transform=val_transforms, cache_dir=cache_path)
+    #val_dataset= SmartCacheDataset(data=val_datalist, transform=val_transforms, cache_num=4, replace_rate=0., num_init_workers=8, num_replace_workers=8, shuffle=False)
+
     test_dataset = PersistentDataset(test_datalist, transform=val_transforms, cache_dir=cache_path)
+    #test_dataset= SmartCacheDataset(data=test_datalist, transform=val_transforms, cache_num=6, replace_rate=0., num_init_workers=8, num_replace_workers=8, shuffle=False)
 
     return train_dataset, val_dataset, test_dataset, input_channels, class_num
 

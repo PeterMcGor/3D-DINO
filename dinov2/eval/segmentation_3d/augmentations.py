@@ -297,11 +297,11 @@ def make_transforms(dataset_name, image_size, resize_scale, min_int):
             # Spatial orientation
             Orientationd(keys=["image", "label"], axcodes="RAS"),
             # Resample to target spacing
-            Spacingd(
-                keys=["image", "label"],
-                pixdim=(1.0 / resize_scale, 1.0 / resize_scale, 1.0 / resize_scale),
-                mode=("bilinear", "nearest"),
-            ),
+            #Spacingd(
+            #    keys=["image", "label"],
+            #    pixdim=(1.0 / resize_scale, 1.0 / resize_scale, 1.0 / resize_scale),
+            #    mode=("bilinear", "nearest"),
+            #),
             # Intensity normalization (per channel for the 3-channel image)
             ScaleIntensityRangePercentilesd(
                 keys=["image"], lower=0.05, upper=99.95, b_min=min_int, b_max=1, 
@@ -338,11 +338,11 @@ def make_transforms(dataset_name, image_size, resize_scale, min_int):
             # Spatial orientation
             Orientationd(keys=["image", "label"], axcodes="RAS"),
             # Resample to target spacing
-            Spacingd(
-                keys=["image", "label"],
-                pixdim=(1.0 / resize_scale, 1.0 / resize_scale, 1.0 / resize_scale),
-                mode=("bilinear", "nearest"),
-            ),
+            #Spacingd(
+            #    keys=["image", "label"],
+            #    pixdim=(1.0 / resize_scale, 1.0 / resize_scale, 1.0 / resize_scale),
+            #    mode=("bilinear", "nearest"),
+            #),
             # Intensity normalization
             ScaleIntensityRangePercentilesd(
                 keys=["image"], lower=0.05, upper=99.95, b_min=min_int, b_max=1, 
@@ -368,11 +368,11 @@ def make_transforms(dataset_name, image_size, resize_scale, min_int):
             # Spatial orientation
             Orientationd(keys=["image", "label"], axcodes="RAS"),
             # Resample to target spacing
-            Spacingd(
-                keys=["image", "label"],
-                pixdim=(1.0 / resize_scale, 1.0 / resize_scale, 1.0 / resize_scale),
-                mode=("bilinear", "nearest"),
-            ),
+            #Spacingd(
+            #    keys=["image", "label"],
+            #    pixdim=(1.0 / resize_scale, 1.0 / resize_scale, 1.0 / resize_scale),
+            #    mode=("bilinear", "nearest"),
+            #),
             # Intensity normalization (per channel for the 3-channel image)
             ScaleIntensityRangePercentilesd(
                 keys=["image"], lower=0.05, upper=99.95, b_min=min_int, b_max=1, 
@@ -409,11 +409,11 @@ def make_transforms(dataset_name, image_size, resize_scale, min_int):
             # Spatial orientation
             Orientationd(keys=["image", "label"], axcodes="RAS"),
             # Resample to target spacing
-            Spacingd(
-                keys=["image", "label"],
-                pixdim=(1.0 / resize_scale, 1.0 / resize_scale, 1.0 / resize_scale),
-                mode=("bilinear", "nearest"),
-            ),
+            #Spacingd(
+            #    keys=["image", "label"],
+            #    pixdim=(1.0 / resize_scale, 1.0 / resize_scale, 1.0 / resize_scale),
+            #    mode=("bilinear", "nearest"),
+            #),
             # Intensity normalization
             ScaleIntensityRangePercentilesd(
                 keys=["image"], lower=0.05, upper=99.95, b_min=min_int, b_max=1, 
