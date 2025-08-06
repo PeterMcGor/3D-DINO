@@ -5,7 +5,7 @@ train:
 student:
   full_pretrained_weights: '/home/jovyan/shared/pedro-maciasgordaliza/fomo25/JEPA3d_last-models/3D-JEPA/128_target_encoder_checkpoint.pth'
 crops:
-  global_crops_size: 112
+  global_crops_size: 128
   local_crops_size: 64
 optim:
   base_lr: 0.001
