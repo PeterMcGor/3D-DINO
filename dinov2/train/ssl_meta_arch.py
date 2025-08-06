@@ -7,12 +7,14 @@
 from functools import partial
 import logging
 import math
+import copy
 
 import torch
 from torch import nn
+import torch.nn.functional as F
 
 from dinov2.loss import DINOLoss, iBOTPatchLoss, KoLeoLoss
-from dinov2.models import build_model_from_cfg
+from dinov2.models import build_model_from_cfg, ijepa_build_model_from_cfg, apply_masks, repeat_interleave_batch
 from dinov2.layers import DINOHead
 from dinov2.utils.utils import has_batchnorms
 from dinov2.utils.param_groups import get_params_groups_with_decay, fuse_params_groups
@@ -443,3 +445,183 @@ class SSLMetaArch(nn.Module):
             self.student[k] = get_fsdp_wrapper(student_model_cfg, modules_to_wrap={BlockChunk})(self.student[k])
             teacher_model_cfg = self.cfg.compute_precision.teacher[k]
             self.teacher[k] = get_fsdp_wrapper(teacher_model_cfg, modules_to_wrap={BlockChunk})(self.teacher[k])
+
+
+class IJEPAMetaArch(nn.Module):
+    def __init__(self, cfg):
+        super().__init__()
+        self.cfg = cfg
+        self.fp16_scaler = ShardedGradScaler() if cfg.compute_precision.grad_scaler else None
+
+        encoder, predictor, embed_dim = ijepa_build_model_from_cfg(cfg)
+
+        #encoder, predictor = encoder, predictor
+
+        logger.info(f"OPTIONS -- architecture : embed_dim: {embed_dim}")
+
+        if cfg.encoder.pretrained_weights:
+            chkpt = torch.load(cfg.encoder.pretrained_weights)
+            logger.info(f"OPTIONS -- pretrained weights: loading from {cfg.encoder.pretrained_weights}")
+            encoder.load_state_dict(chkpt["model"], strict=False)
+
+        target_encoder = copy.deepcopy(encoder)
+
+        self.embed_dim = embed_dim
+
+
+        self.need_to_synchronize_fsdp_streams = True
+
+        self.encoder = encoder
+        self.predictor = predictor
+        self.target_encoder = target_encoder
+
+        # allow restarting from a checkpoint (adapting resolution experiments)
+        if cfg.encoder.full_pretrained_weights:
+            chkpt = torch.load(cfg.encoder.full_pretrained_weights)
+            logger.info(f"OPTIONS -- full pretrained weights: loading from {cfg.encoder.full_pretrained_weights}")
+            interpolate_pos_encoding(chkpt["teacher"], cfg.crops.global_crops_size, cfg.encoder.patch_size)
+            msg = self.encoder.load_state_dict(chkpt["target_predictor"], strict=False)
+            logger.info("Pretrained weights loaded with msg: {}".format(msg))
+
+        # there is no backpropagation through the teacher, so no need for gradients
+        for p in self.target_encoder.parameters():
+            p.requires_grad = False
+        logger.info(f"Encoder and Target predictor are built: they are both {cfg.encoder.arch} network.")
+
+    def forward(self, inputs):
+        raise NotImplementedError
+
+    def backprop_loss(self, loss):
+        if self.fp16_scaler is not None:
+            self.fp16_scaler.scale(loss).backward()
+        else:
+            loss.backward()
+
+    def forward_backward(self, batch):
+        udata, masks_enc, masks_pred = batch["collated_batch"], batch["collated_masks_enc"], batch["collated_masks_pred"]
+
+        def load_imgs():
+            # -- unsupervised imgs
+            imgs = udata.to(device, non_blocking=True)
+            masks_1 = [u.to(device, non_blocking=True) for u in masks_enc]
+            masks_2 = [u.to(device, non_blocking=True) for u in masks_pred]
+            return imgs, masks_1, masks_2
+
+        device = next(self.encoder.parameters()).device
+        imgs, masks_enc, masks_pred = load_imgs()
+
+
+
+        # teacher output
+        @torch.no_grad()
+        def forward_target():
+            h = self.target_encoder(imgs)["x_prenorm"]
+            h = F.layer_norm(h, (h.size(-1),))  # normalize over feature-dim
+            B = len(h)
+            # -- create targets (masked regions of h)
+            h = apply_masks(h, masks_pred)
+            h = repeat_interleave_batch(h, B, repeat=len(masks_enc))
+            return h
+
+        def forward_context():
+            z = self.encoder(imgs, masks_enc)["x_prenorm"]
+            z = self.predictor(z, masks_enc, masks_pred)
+            return z
+
+        def loss_fn(z, h):
+            loss = F.smooth_l1_loss(z, h)
+            #loss = AllReduce.apply(loss)
+            return loss
+
+
+
+        loss_dict = {}
+
+        h = forward_target()
+        reshard_fsdp_model(self.target_encoder)
+        z = forward_context()
+
+        loss = loss_fn(z, h)
+
+        loss_dict["ijepa_loss"] = loss
+
+        self.backprop_loss(loss)
+
+        self.fsdp_synchronize_streams()
+
+        return loss_dict
+
+    def fsdp_synchronize_streams(self):
+        if self.need_to_synchronize_fsdp_streams:
+            torch.cuda.synchronize()
+            if hasattr(self.encoder, '_streams'):
+                self.encoder._streams = self.target_encoder._streams = self.predictor._streams
+            self.need_to_synchronize_fsdp_streams = False
+
+    def update_target_encoder(self, m):
+        encoder_param_list = []
+        target_encoder_param_list = []
+        with torch.no_grad():
+            for ms, mt in zip(get_fsdp_modules(self.encoder), get_fsdp_modules(self.target_encoder)):
+                encoder_param_list += ms.params
+                target_encoder_param_list += mt.params
+            torch._foreach_mul_(target_encoder_param_list, m)
+            torch._foreach_add_(target_encoder_param_list, encoder_param_list, alpha = 1.0 - m)
+
+
+    def train(self):
+        super().train()
+        self.target_encoder.eval()
+
+    def get_maybe_fused_params_for_submodel(self, m):
+        params_groups = get_params_groups_with_decay(
+            model=m,
+            lr_decay_rate=self.cfg.optim.layerwise_decay,
+            patch_embed_lr_mult=self.cfg.optim.patch_embed_lr_mult,
+        )
+        fused_params_groups = fuse_params_groups(params_groups)
+        logger.info("fusing param groups")
+
+        for g in fused_params_groups:
+            g["foreach"] = True
+        return fused_params_groups
+
+    def get_params_groups(self):
+        all_params_groups = [
+            {
+                'params': (p for n, p in self.encoder.named_parameters()
+                           if ('bias' not in n) and (len(p.shape) != 1))
+            }, {
+                'params': (p for n, p in self.predictor.named_parameters()
+                           if ('bias' not in n) and (len(p.shape) != 1))
+            }, {
+                'params': (p for n, p in self.encoder.named_parameters()
+                           if ('bias' in n) or (len(p.shape) == 1)),
+                'WD_exclude': True,
+                'weight_decay': 0
+            }, {
+                'params': (p for n, p in self.predictor.named_parameters()
+                           if ('bias' in n) or (len(p.shape) == 1)),
+                'WD_exclude': True,
+                'weight_decay': 0
+            }
+        ]
+        return all_params_groups
+
+    def prepare_for_distributed_training(self):
+        logger.info("DISTRIBUTED FSDP -- preparing model for distributed training")
+        if has_batchnorms(self.encoder):
+            raise NotImplementedError
+        # below will synchronize all encoder subnetworks across gpus:
+
+        self.target_encoder.load_state_dict(self.encoder.state_dict())
+
+        encoder_model_cfg = self.cfg.compute_precision.encoder
+        self.encoder = get_fsdp_wrapper(encoder_model_cfg, modules_to_wrap={BlockChunk})(self.encoder)
+
+        predictor_model_cfg = self.cfg.compute_precision.predictor
+        self.predictor = get_fsdp_wrapper(predictor_model_cfg, modules_to_wrap={BlockChunk})(self.predictor)
+
+        target_encoder_model_cfg = self.cfg.compute_precision.target_encoder
+        self.target_encoder = get_fsdp_wrapper(target_encoder_model_cfg, modules_to_wrap={BlockChunk})(self.target_encoder)
+
