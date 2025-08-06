@@ -20,28 +20,28 @@ import os
 import uuid
 from pathlib import Path
 
-from dinov2.train import train3d
+from dinov2.train import ijepa_train3d
 import submitit
 
 
 def parse_args():
-    parser = argparse.ArgumentParser("Submitit for 3DINO", parents=[train3d.get_args_parser()], add_help=False)
+    parser = argparse.ArgumentParser("Submitit for IJEPA", parents=[ijepa_train3d.get_args_parser()], add_help=False)
     parser.add_argument("--ngpus", default=4, type=int, help="Number of gpus to request on each node")
-    parser.add_argument("--nodes", default=2, type=int, help="Number of nodes to request")
+    parser.add_argument("--nodes", default=1, type=int, help="Number of nodes to request")
     parser.add_argument("--timeout", default=2800, type=int, help="Duration of the job")
     #parser.add_argument("--output_dir", default="", type=str)
 
     # Lucia specific parameters
-    parser.add_argument("--partition", default="gpu", type=str, help="Partition where to submit")
+    parser.add_argument("--partition", default="ia", type=str, help="Partition where to submit")
     #parser.add_argument("--use_volta32", action='store_true', help="Big models? Use this")
     parser.add_argument('--job-name', default="3DINO", type=str)
     parser.add_argument("--output", default="/gpfs/home/acad/ucl-elen/gerinb/slurm/logs/%j_%x.out", type=str)
     parser.add_argument("--cpus-per-task", default=8, type=int)
-    parser.add_argument("--mem", default="220G", type=str)
+    parser.add_argument("--mem", default="240G", type=str)
     parser.add_argument("--time", default="1-23:59:58", type=str)
     parser.add_argument("--mail-user", default="benoit.gerin@uclouvain.be", type=str)
     parser.add_argument("--mail-type", default="ALL", type=str)
-    parser.add_argument("--account", default="danitim", type=str)
+    parser.add_argument("--account", default="ariacpg", type=str)
 
     return parser.parse_args()
 
@@ -69,10 +69,9 @@ class Trainer(object):
         self.args = args
 
     def __call__(self):
-        from dinov2.train import train3d
-
+        from dinov2.train import ijepa_train3d
         self._setup_gpu_args()
-        train3d.main(self.args)
+        ijepa_train3d.main(self.args)
 
     def checkpoint(self):
         import os
@@ -98,12 +97,12 @@ class Trainer(object):
 def main():
     args = parse_args()
     if args.output_dir == "":
-        args.output_dir = get_shared_folder() / "job"
+        args.output_dir = get_shared_folder() / "ijepa_v2"
     Path(args.output_dir).mkdir(parents=True, exist_ok=True)
     executor = submitit.AutoExecutor(folder=args.output_dir, slurm_max_num_timeout=2)
 
-    args.config_file = "dinov2/configs/lucia_ssl3d_default_config.yaml"
-    args.cache_dir = "/gpfs/projects/acad/danitim/gerinb/cell_profiling/data/FOMO25/cache"
+    args.config_file = "dinov2/configs/lucia_ijepa_default_config.yaml"
+    args.cache_dir = "/gpfs/projects/acad/ariacpg/gerinb/data/FOMO25/ijepa_cache"
 
 
     num_gpus_per_node = args.ngpus
@@ -127,7 +126,7 @@ def main():
 
 
     executor.update_parameters(
-        mem_gb=220,
+        mem_gb=240,
         gpus_per_node=num_gpus_per_node,
         tasks_per_node=num_gpus_per_node,  # one task per GPU
         cpus_per_task=args.cpus_per_task,
@@ -141,7 +140,7 @@ def main():
         **kwargs
     )
 
-    executor.update_parameters(name="3DINO")
+    executor.update_parameters(name="IJEPA")
 
     args.dist_url = get_init_file().as_uri()
 
