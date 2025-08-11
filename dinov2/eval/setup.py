@@ -10,7 +10,7 @@ from typing import Any, List, Optional, Tuple
 import torch
 import torch.backends.cudnn as cudnn
 
-from dinov2.models import build_model_from_cfg
+from dinov2.models import build_model_from_cfg, ijepa_build_model_from_cfg
 from dinov2.utils.config import setup_3d
 import dinov2.utils.utils as dinov2_utils
 
@@ -58,12 +58,33 @@ def get_autocast_dtype(config):
         return torch.bfloat16
     else:
         return torch.float
+    
+def get_jepa_autocast_dtype(config):
+    """Get autocast dtype for JEPA models"""
+    # Use target_encoder as the primary reference for JEPA
+    target_encoder_dtype_str = config.compute_precision.target_encoder.mixed_precision.param_dtype
+    
+    if target_encoder_dtype_str == "fp16":
+        return torch.half
+    elif target_encoder_dtype_str == "bf16":
+        return torch.bfloat16
+    else:
+        return torch.float
 
 
-def build_model_for_eval(config, pretrained_weights):
-    model, _ = build_model_from_cfg(config, only_teacher=True)
+
+def build_model_for_eval(config, pretrained_weights, jepa_learning=False):
+    if jepa_learning:
+        model, predictor, embed_dim = ijepa_build_model_from_cfg(config)
+    else:
+        model, _ = build_model_from_cfg(config, only_teacher=True)
+        #model, _ = build_model_from_cfg(config, only_teacher=True)
     try:
-        dinov2_utils.load_pretrained_weights(model, pretrained_weights, "teacher")
+        if jepa_learning:
+            dinov2_utils.load_pretrained_weights(model, pretrained_weights, "target_encoder")
+        else:
+            # For DINOv2, load the teacher weights
+            dinov2_utils.load_pretrained_weights(model, pretrained_weights, "teacher")
     except FileNotFoundError as e:
         print(e)
         print('No weights found, using random initialization!')
@@ -75,6 +96,6 @@ def build_model_for_eval(config, pretrained_weights):
 def setup_and_build_model_3d(args) -> Tuple[Any, torch.dtype]:
     cudnn.benchmark = True
     config = setup_3d(args)
-    model = build_model_for_eval(config, args.pretrained_weights)
-    autocast_dtype = get_autocast_dtype(config)
+    model = build_model_for_eval(config, args.pretrained_weights, jepa_learning=args.jepa_learning)
+    autocast_dtype = get_jepa_autocast_dtype(config) if args.jepa_learning else get_autocast_dtype(config)
     return model, autocast_dtype

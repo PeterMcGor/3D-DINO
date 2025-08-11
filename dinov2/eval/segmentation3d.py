@@ -97,6 +97,18 @@ def add_seg_args(parser):
         help="path to cache directory for monai persistent dataset"
     )
 
+    parser.add_argument(
+        "--jepa-learning",
+        action="store_true",
+        help="run Jepa or DINO",
+    )
+
+    parser.add_argument(
+        "--use_cls",
+        action='store_false',
+        help="Jepa doesnt have CLS...??",
+    )
+
     return parser
 
 
@@ -186,7 +198,7 @@ def do_finetune(feature_model, autocast_dtype, args):
     elif args.segmentation_head == 'Linear':
         seg_model = LinearDecoderHead(feature_model, input_channels, args.image_size, num_classes, autocast_ctx)
     elif args.segmentation_head == 'ViTAdapterUNETR':
-        seg_model = ViTAdapterUNETRHead(feature_model, input_channels, args.image_size, num_classes, autocast_ctx)
+        seg_model = ViTAdapterUNETRHead(feature_model, input_channels, args.image_size, num_classes, autocast_ctx, use_cls=args.use_cls)
     else:
         raise ValueError(f"Unknown segmentation head: {args.segmentation_head}")
 

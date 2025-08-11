@@ -13,7 +13,7 @@ from omegaconf import OmegaConf
 import dinov2.distributed as distributed
 from dinov2.logging import setup_logging
 from dinov2.utils import utils
-from dinov2.configs import dinov2_default_config_3d
+from dinov2.configs import dinov2_default_config_3d, ijepa_default_config_3d
 
 
 logger = logging.getLogger("dinov2")
@@ -41,7 +41,8 @@ def write_config(cfg, output_dir, name="config.yaml"):
 def get_cfg_from_args_3d(args):
     args.output_dir = os.path.abspath(args.output_dir)
     args.opts += [f"train.output_dir={args.output_dir}", f"train.cache_dir={args.cache_dir}"]
-    default_cfg = OmegaConf.create(dinov2_default_config_3d)
+    default_cfg_file = ijepa_default_config_3d if args.jepa_learning else dinov2_default_config_3d
+    default_cfg = OmegaConf.create(default_cfg_file)
     cfg = OmegaConf.load(args.config_file)
     cfg = OmegaConf.merge(default_cfg, cfg, OmegaConf.from_cli(args.opts))
     return cfg

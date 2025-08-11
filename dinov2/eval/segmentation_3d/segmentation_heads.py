@@ -224,12 +224,12 @@ class LinearDecoderHead(nn.Module):
 
 class ViTAdapterUNETRHead(nn.Module):
 
-    def __init__(self, feature_model, input_channels, image_size, num_classes, autocast_ctx):
+    def __init__(self, feature_model, input_channels, image_size, num_classes, autocast_ctx, use_cls=True):
         super().__init__()
 
         self.autocast_ctx = autocast_ctx
         self.input_channels = input_channels
-        self.feature_model = ViTAdapter(feature_model, input_channels)
+        self.feature_model = ViTAdapter(feature_model, input_channels, use_cls=use_cls, pretrain_size=image_size)
         self.hidden_size = self.feature_model.vit_model.num_features
         self.feature_size = 32
         self.patch_size = self.feature_model.vit_model.patch_embed.patch_size

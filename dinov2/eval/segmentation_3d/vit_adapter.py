@@ -12,6 +12,7 @@ import torch.nn as nn
 import torch.nn.functional as F
 from torch.nn.init import normal_
 from .adapter_modules import SpatialPriorModule, InteractionBlock, deform_inputs, MSDeformAttn, InteractionBlockWithCls
+from dinov2.models.vision_transformer import IJEPAVisionTransformer
 
 
 class ViTAdapter(nn.Module):
@@ -117,13 +118,19 @@ class ViTAdapter(nn.Module):
         # Patch Embedding forward
         x = self.vit_model.patch_embed(x)
         _, n, dim = x.shape
-        pos_embed = self._get_pos_embed(self.vit_model.pos_embed[:, 1:], H, W, D)
+        if isinstance(self.vit_model, IJEPAVisionTransformer):
+            pos_embed = self._get_pos_embed(self.vit_model.pos_embed, H, W, D) # Not token use. Check vision_transformer.py line #251
+        else:
+            pos_embed = self._get_pos_embed(self.vit_model.pos_embed[:, 1:], H, W, D)
 
         # use cls token
         if self.use_cls:
             cls_token = self.vit_model.cls_token.expand(x.shape[0], -1, -1)
             x = torch.cat((cls_token, x), dim=1)
-            pos_embed = torch.cat((self.vit_model.pos_embed[:, :1], pos_embed), dim=1)
+            if isinstance(self.vit_model, IJEPAVisionTransformer):
+                pos_embed = self._get_pos_embed(self.vit_model.pos_embed, H, W, D)
+            else:
+                pos_embed = torch.cat((self.vit_model.pos_embed[:, :1], pos_embed), dim=1)
 
         x = x + pos_embed
 
