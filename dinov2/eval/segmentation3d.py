@@ -108,6 +108,22 @@ def add_seg_args(parser):
         action='store_false',
         help="Jepa doesnt have CLS...??",
     )
+      
+    parser.add_argument(
+        "--weight",
+        type=float,
+        nargs='*',
+        default=[1.0, 1.0],
+        help="List of weights (space-separated floats)",
+    )
+    
+    parser.add_argument(
+        "--ce_weight",
+        type=float,
+        nargs='*', 
+        default=[1.0, 1.0],
+        help="List of cross-entropy weights (space-separated floats)",
+    )
 
     return parser
 
@@ -231,9 +247,9 @@ def do_finetune(feature_model, autocast_dtype, args):
     )
 
     if args.dataset_name == 'BTCV' or args.dataset_name == 'LA-SEG' or args.dataset_name == 'TDSC-ABUS' or "fomo-task2_3channels" in args.dataset_name or "fomo-task2_2channels" in args.dataset_name:
-        loss_fn = DiceCELoss(to_onehot_y=True, softmax=True)
+        loss_fn = DiceCELoss(to_onehot_y=True, softmax=True, weight=torch.tensor(args.weight), ce_weight=torch.tensor(args.ce_weight))
     elif args.dataset_name == 'BraTS':
-        loss_fn = DiceLoss(smooth_nr=0, smooth_dr=1e-5, squared_pred=True, to_onehot_y=False, sigmoid=True)
+        loss_fn = DiceLoss(smooth_nr=0, smooth_dr=1e-5, squared_pred=True, to_onehot_y=False, sigmoid=True, weight=torch.tensor(args.weight))
     else:
         raise ValueError(f"Unknown dataset name: {args.dataset_name}")
 
