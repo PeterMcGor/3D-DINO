@@ -249,7 +249,7 @@ def do_finetune(feature_model, autocast_dtype, args):
     if args.dataset_name == 'BTCV' or args.dataset_name == 'LA-SEG' or args.dataset_name == 'TDSC-ABUS' or "fomo-task2_3channels" in args.dataset_name or "fomo-task2_2channels" in args.dataset_name:
         loss_fn = DiceCELoss(to_onehot_y=True, softmax=True, weight=torch.tensor(args.weight), ce_weight=torch.tensor(args.ce_weight))
     elif args.dataset_name == 'BraTS':
-        loss_fn = DiceLoss(smooth_nr=0, smooth_dr=1e-5, squared_pred=True, to_onehot_y=False, sigmoid=True, weight=torch.tensor(args.weight))
+        loss_fn = DiceLoss(smooth_nr=0, smooth_dr=1e-5, squared_pred=True, to_onehot_y=False, sigmoid=True, weight=args.weight)
     else:
         raise ValueError(f"Unknown dataset name: {args.dataset_name}")
 
