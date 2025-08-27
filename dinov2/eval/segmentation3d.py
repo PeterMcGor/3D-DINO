@@ -146,9 +146,9 @@ def train_iter(model, batch, optimizer, scheduler, loss_function, scaler):
     return loss.item()
 
 
-def val_iter(model, batch, metric, image_size, batch_size, overlap=0.5):
+def val_iter(model, batch, metric, image_size, batch_size, overlap=0.5, mode="gaussian"):
     x, y = (batch["image"].cuda(), batch["label"].cuda())
-    logits = sliding_window_inference(x, image_size, batch_size, model, overlap=overlap)
+    logits = sliding_window_inference(x, image_size, batch_size, model, overlap=overlap, mode=mode)
 
     iter_metric = metric(logits, y)
     return iter_metric
@@ -295,7 +295,7 @@ def do_finetune(feature_model, autocast_dtype, args):
                         image_size=(args.image_size,) * 3,
                         batch_size=args.batch_size,
                         metric=dice_metric,
-                        overlap=0.
+                        overlap=0.5
                     )
 
                     total_val_dice += val_dice
@@ -349,7 +349,7 @@ def do_finetune(feature_model, autocast_dtype, args):
                 image_size=(args.image_size,) * 3,
                 batch_size=args.batch_size,
                 metric=dice_metric,
-                overlap=0.75
+                overlap=0.5
             )
 
             total_test_dice += test_dice

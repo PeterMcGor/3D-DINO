@@ -4,7 +4,7 @@
 # found in the LICENSE file in the root directory of this source tree.
 
 from monai.metrics import DiceMetric
-from monai.transforms import AsDiscrete, Compose, Activations
+from monai.transforms import AsDiscrete, Compose, Activations, KeepLargestConnectedComponent
 from monai.data import decollate_batch
 
 
@@ -69,6 +69,19 @@ class LASEGMetrics(BTCVMetrics):
         self.post_pred = AsDiscrete(argmax=True, to_onehot=2)
 
 
+class FOMOMetrics(BTCVMetrics):
+    
+    def __init__(self):
+        super().__init__()
+        self.post_label = AsDiscrete(to_onehot=2)
+        # Add KeepLargestConnectedComponent to the post-processing pipeline
+        self.post_pred = Compose([
+            AsDiscrete(argmax=True),  # Convert logits to discrete predictions
+            KeepLargestConnectedComponent(),  # Keep only the largest connected component
+            AsDiscrete(to_onehot=2)  # Convert to one-hot encoding
+        ])
+
+
 def get_metric(dataset_name):
     if dataset_name == "BTCV":
         return BTCVMetrics()
@@ -79,6 +92,6 @@ def get_metric(dataset_name):
     elif dataset_name == "TDSC-ABUS":
         return LASEGMetrics()  # same as LA-SEG
     elif "fomo-task2_3channels" in dataset_name or "fomo-task2_2channels" in dataset_name:
-        return LASEGMetrics()  # same as LA-SEG
+        return FOMOMetrics()
     else:
         raise ValueError(f"Unknown dataset name: {dataset_name}")

@@ -12,4 +12,5 @@ cuml-cu11
 monai==1.3.0
 nibabel==5.1.0
 scikit-learn
+scikit-image
 torchio

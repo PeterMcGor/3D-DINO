@@ -25,6 +25,7 @@ import yaml
 import nibabel as nib
 from functools import partial
 from pathlib import Path
+from scipy import ndimage
 
 # Import your model components (adjust imports based on your project structure)
 from dinov2.eval.segmentation_3d.segmentation_heads import ViTAdapterUNETRHead
@@ -41,6 +42,39 @@ from monai.transforms import (
 )
 import torch.nn.functional as F
 
+
+
+def keep_largest_connected_component_3d(binary_mask):
+    """
+    Keep only the largest connected component in a 3D binary mask
+    
+    Args:
+        binary_mask: 3D numpy array with 0s and 1s
+    
+    Returns:
+        3D numpy array with only the largest connected component
+    """
+    if np.sum(binary_mask) == 0:
+        return binary_mask
+    
+    # Label connected components (26-connectivity for 3D)
+    labeled_array, num_features = ndimage.label(binary_mask)
+    
+    if num_features <= 1:
+        return binary_mask
+    
+    # Count voxels in each component
+    component_sizes = np.bincount(labeled_array.ravel())
+    # Skip background (label 0)
+    component_sizes[0] = 0
+    
+    # Find largest component
+    largest_component_label = np.argmax(component_sizes)
+    
+    # Keep only the largest component
+    largest_component_mask = (labeled_array == largest_component_label).astype(np.uint8)
+    
+    return largest_component_mask
 
 def create_predict_args():
     """Create argument parser for prediction interface"""
@@ -81,7 +115,7 @@ def create_predict_args():
                        help='Use CLS token (for JEPA compatibility)')
     parser.add_argument('--batch-size', type=int, default=1,
                        help='Batch size for sliding window inference')
-    parser.add_argument('--overlap', type=float, default=0.75,
+    parser.add_argument('--overlap', type=float, default=0.5,
                        help='Overlap for sliding window inference')
     parser.add_argument('--cache-dir', type=str, default='./temp_cache',
                        help='Cache directory for temporary files')
@@ -413,6 +447,7 @@ def postprocess_and_save(predictions, reference_img, output_path):
     
     # Create output directory if it doesn't exist
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
+    binary_mask = keep_largest_connected_component_3d(binary_mask)
     
     # Save with original affine and header
     output_img = nib.Nifti1Image(
