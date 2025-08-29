@@ -198,24 +198,24 @@ def prepare_input_images(args):
     if args.t2s is not None and args.swi is not None:
         print("Warning: Both T2* and SWI provided. Using T2*.")
         data_dict = {
-            "image1": args.flair,
-            "image2": args.dwi_b1000,
+            "image2": args.flair,
+            "image1": args.dwi_b1000,
             "image3": args.t2s
         }
         dataset_type = "3channels"
         print("Using 3-channel mode: FLAIR + DWI + T2*")
     elif args.t2s is not None:
         data_dict = {
-            "image1": args.flair,
-            "image2": args.dwi_b1000,
+            "image2": args.flair,
+            "image1": args.dwi_b1000,
             "image3": args.t2s
         }
         dataset_type = "3channels"
         print("Using 3-channel mode: FLAIR + DWI + T2*")
     elif args.swi is not None:
         data_dict = {
-            "image1": args.flair,
-            "image2": args.dwi_b1000,
+            "image2": args.flair,
+            "image1": args.dwi_b1000,
             "image3": args.swi
         }
         dataset_type = "3channels"
@@ -223,8 +223,8 @@ def prepare_input_images(args):
     else:
         # 2-channel mode: only FLAIR + DWI
         data_dict = {
-            "image1": args.flair,
-            "image2": args.dwi_b1000
+            "image2": args.flair,
+            "image1": args.dwi_b1000
         }
         dataset_type = "2channels"
         print("Using 2-channel mode: FLAIR + DWI")
